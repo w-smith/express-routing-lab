@@ -31,6 +31,12 @@ router.post('/', function(req,res) {
 });
 
 
+router.put('/:id', function(req, res) {
+	candies[req.params.index-1] = req.body;
+});
+
+
+
 // router.get('/new', function(req, res) {
 //  // NEW - Typically Displays an HTML Form
 //  res.send('this would typically display an HTML form');
