@@ -33,7 +33,17 @@ router.post('/', function(req,res) {
 
 router.put('/:id', function(req, res) {
 	candies[req.params.index-1] = req.body;
+	res.send(req.candies);
 });
+
+router.delete('/:id', function(req, res) {
+	candies[req.params.id-1] = null;
+	res.send("hi. guys. sup? dog. tight.");
+	res.send(req.candies);
+});
+
+
+
 
 
 
