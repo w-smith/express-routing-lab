@@ -21,25 +21,41 @@ router.get('/', function(req,res) {
 
 router.get('/:id', function(req, res) {
  // SHOW
- 	res.json(candies[req.params.id-1]);
+ 	res.send(candies[Number(req.params.id)-1]);
 });
 
 
 router.post('/', function(req,res) {
- 	candies.push(req.candies);
-	res.json(req.candies);
+ 	req.body.id = candies.length+1;
+	if(req.body.name && req.body.color){
+		console.log('candy created');
+		candies.push(req.body);
+		res.send(req.body);
+	} else{
+		console.log('Error');
+		res.send('Error: Invalid submission');
+	}
+
 });
 
 
-router.put('/:id', function(req, res) {
-	candies[req.params.index-1] = req.body;
-	res.send(req.candies);
+router.put('/:id', function(req,res) {
+	var myID = Number(req.params.id);
+	console.log('updated',req.params.id);
+	if(req.body.name){
+		candies[myID-1].name = req.body.name;
+	}
+	if(req.body.color){
+		candies[myID-1].color = req.body.color;	}
+
+	res.send(candies[myID-1]);
 });
+
 
 router.delete('/:id', function(req, res) {
 	candies[req.params.id-1] = null;
 	res.send("hi. guys. sup? dog. tight.");
-	res.send(req.candies);
+    res.send(candies[req.params.index-1]);
 });
 
 
